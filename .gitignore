@@ -1,8 +1,4 @@
-.env
-.env.local
-.env.docker
-.venv/
-node_modules/
-dist/
 __pycache__/
-.pytest_cache/
+*.pyc
+.venv/
+.env
