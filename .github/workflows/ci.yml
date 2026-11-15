@@ -23,7 +23,7 @@ jobs:
       - name: Compile backend
         run: python -m compileall backend
       - name: Test backend contract
-        run: python -m pytest backend/tests -q
+        run: python -m pytest courseHub_demo/backend/tests -q
 
   frontend:
     runs-on: ubuntu-latest
