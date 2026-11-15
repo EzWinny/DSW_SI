@@ -11,6 +11,9 @@ permissions:
 jobs:
   backend:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: courseHub_demo
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-python@v5
@@ -19,17 +22,17 @@ jobs:
           cache: pip
           cache-dependency-path: courseHub_demo/backend/requirements*.txt
       - name: Install backend dependencies
-        run: python -m pip install -r courseHub_demo/backend/requirements-dev.txt
+        run: python -m pip install -r backend/requirements-dev.txt
       - name: Compile backend
         run: python -m compileall backend
       - name: Test backend contract
-        run: python -m pytest courseHub_demo/backend/tests -q
+        run: python -m pytest backend/tests -q
 
   frontend:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: frontend
+        working-directory: courseHub_demo/frontend
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v7
@@ -47,6 +50,9 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     needs: [backend, frontend]
+    defaults:
+      run:
+        working-directory: courseHub_demo
     steps:
       - uses: actions/checkout@v6
       - name: Prepare non-secret Docker env for build validation
